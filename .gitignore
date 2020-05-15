@@ -1,0 +1,10 @@
+*~
+*#
+*.ds
+*.exe
+*.out
+*.pyc
+.DS_Store
+.vscode/
+__pycache__/
+.gitattributes/
