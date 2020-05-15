@@ -163,7 +163,6 @@ Second part of Airbnb: Joann Vuong
 ## License
 Public Domain. No copy write protection. 
 --------
-========
 --------
 # 0x06. AirBnB clone - Web dynamic
 :open_file_folder: Foundations - Higher-level programming ― AirBnB clone
@@ -255,8 +254,8 @@ config.vm.network :forwarded_port, guest: 5001, host: 5001
 Alexa Orrico - [Github](https://github.com/alexaorrico) / [Twitter](https://twitter.com/alexa_orrico)  
 Jennifer Huang - [Github](https://github.com/jhuang10123) / [Twitter](https://twitter.com/earthtojhuang)  
 Jhoan Zamora - [Github](https://github.com/jzamora5) / [Twitter](https://twitter.com/JhoanZamora10)  
-David Ovalle - [Github](https://github.com/Nukemenonai) / [Twitter](https://twitter.com/disartDave) 
-Manuel Mosquera - [GitHub](https://github.com/mmanumos) / [Twitter](https://twitter.com/mmanumos) 
+David Ovalle - [Github](https://github.com/Nukemenonai) / [Twitter](https://twitter.com/disartDave)  
+Manuel Mosquera - [GitHub](https://github.com/mmanumos) / [Twitter](https://twitter.com/mmanumos)  
 Javier Andrés Garzón Patarroyo - [GitHub](https://github.com/javierandresgp) / [Twitter](https://twitter.com/javierandresgp0)
 
 Fourth part of Airbnb: 0x06. AirBnB clone - Web dynamic
