@@ -1,20 +1,24 @@
-$( document ).ready(function() {
-  const checkbox = $('.amenities input[type="checkbox"]');
-  checkbox.bind('click',function () {
+// Global variable that storage selected amenities
+const objAmen = {};
+
+$(document).ready(function () {
+  const checkbox = $('.amenities .popover ul li input[type="checkbox"]');
+  // Event click for amenities checks
+  checkbox.bind('click', function () {
     const id = $(this).attr('data-id');
     const name = $(this).attr('data-name');
-    const obj = {};
-    const arr = [];
+    const listName = [];
     if (this.checked) {
-      obj[id] = name;
+      if (!(id in objAmen)) {
+        objAmen[id] = name;
+      }
     } else {
-      delete (obj[id]);
+      delete (objAmen[id]);
     }
-    for (const i in obj) {
-      arr.push(obj[i]);
+    for (const i in objAmen) {
+      listName.push(objAmen[i]);
     }
-    let names = arr.join(', ');
+    const names = listName.join(', ');
     $('.amenities h4').text(names);
-    console.log(arr);
   });
 });
