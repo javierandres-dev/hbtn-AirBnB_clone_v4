@@ -20,13 +20,18 @@ $(document).ready(function () {
     }
     const names = listName.join(', ');
     $('.amenities h4').text(names);
-    $.get('http://localhost:5001/api/v1/status/', function (data) {
-      console.log(data.status);
-      if (data.status === 'OK') {
+  });
+  // Get is used to verify if API 
+  $.ajax({
+    url: 'http://127.0.0.1:5001/api/v1/status/',
+    type: 'GET',
+    success: function (data) {
+      if (data.status == 'OK'){
         $('#api_status').addClass('available');
-      } else {
-        $('#api_status').remove('available');
-      }
-    })
+      }   
+    },
+    error: function () {
+      console.log('error API connection');
+    }
   });
 });
