@@ -40,6 +40,8 @@ $(document).ready(function () {
     contentType: 'application/json',
     dataType: 'json',
     success: function (data) {
+	console.log('data');
+	console.log(data);
       allPlaces(data);
     }
   });
@@ -50,8 +52,10 @@ const allPlaces = function (data) {
   for (const place of data) {
     arrPlaces.push(place.name.toLowerCase());
   }
+  // Sort names list in alphabetical order
   arrPlaces.sort();
   const objPlaces = data.sort((x, y) => arrPlaces.indexOf(x.name.toLowerCase()) - arrPlaces.indexOf(y.name.toLowerCase()));
+  console.log('objPlaces');
   console.log(objPlaces);
   for (const place of objPlaces) {
     $(  `
