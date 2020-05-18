@@ -68,6 +68,7 @@ const allPlaces = function (data) {
         <div class="user">
         </div>
         <div class="description">
+          ${ place.description }
         </div>
       </article>
     `).appendTo('section.places');
