@@ -1,41 +1,24 @@
-// Global variable that storage selected amenities
+// Global variable that storage selected amenities, states and cities.
 const objAmen = {};
+const objState = {};
+const objCity = {};
 $(document).ready(function () {
-  const checkbox = $('.amenities .popover ul li input[type="checkbox"]');
-  // Event click for amenities checks
-  checkbox.bind('click', function () {
-    const id = $(this).attr('data-id');
-    const name = $(this).attr('data-name');
-    const listName = [];
-    if (this.checked) {
-      if (!(id in objAmen)) {
-        objAmen[id] = name;
-      }
-    } else {
-      delete (objAmen[id]);
-	console.log('Entra delete');
-    }
-    for (const i in objAmen) {
-      listName.push(objAmen[i]);
-    }
-    const names = listName.join(', ');
-    $('.amenities h4').text(names);
-  });
-  // Get is used to verify if API 
-  $.ajax({
-    url: 'http://127.0.0.1:5001/api/v1/status/',
-    type: 'GET',
-    success: function (data) {
-      if (data.status == 'OK'){
-        $('#api_status').addClass('available');
-      }   
-    },
-    error: function () {
-      console.log('error API connection');
-    }
-  });
 
-  // Send a POST request
+    // API validation connection 
+    $.ajax({
+	url: 'http://127.0.0.1:5001/api/v1/status/',
+	type: 'GET',
+	success: function (data) {
+	    if (data.status == 'OK'){
+		$('#api_status').addClass('available');
+	    }   
+	},
+	error: function () {
+	    console.log('error API connection');
+	}
+    });
+
+  // Send a POST request for Initial places without filters
   $.post({
     url: 'http://localhost:5001/api/v1/places_search/',
     data: JSON.stringify({amenities: []}),
@@ -45,6 +28,67 @@ $(document).ready(function () {
       allPlaces(data);
     }
   });
+
+  // Check Amenities
+  const checkAmenity = $('.amenities .popover ul li input[type="checkbox"]');
+  checkAmenity.bind('click', function () {
+    const id = $(this).attr('data-id');
+    const name = $(this).attr('data-name');
+    const listName = [];
+    if (this.checked) {
+      if (!(id in objAmen)) {
+        objAmen[id] = name;
+      }
+    } else {
+      delete (objAmen[id]);
+    }
+    for (const i in objAmen) {
+      listName.push(objAmen[i]);
+    }
+    const names = listName.join(', ');
+    $('.amenities h4').text(names);
+  });
+
+    // Check States
+    const checkState = $('.locations .popover ul li h2 input[type="checkbox"]');
+  checkState.bind('click', function () {
+    const id = $(this).attr('data-id');
+    const name = $(this).attr('data-name');
+    const listName = [];
+    if (this.checked) {
+      if (!(id in objState)) {
+        objState[id] = name;
+      }
+    } else {
+      delete (objState[id]);
+    }
+    for (const i in objState) {
+      listName.push(objState[i]);
+    }
+    const names = listName.join(', ');
+    $('.locations h4').text(names);
+  });
+
+  // Check cities
+    const checkCity = $('.locations .popover ul li ul li input[type="checkbox"]');
+  checkCity.bind('click', function () {
+    const id = $(this).attr('data-id');
+    const name = $(this).attr('data-name');
+    const listName = [];
+    if (this.checked) {
+      if (!(id in objState)) {
+        objCity[id] = name;
+      }
+    } else {
+      delete (objCity[id]);
+    }
+    for (const i in objCity) {
+      listName.push(objCity[i]);
+    }
+    const names = listName.join(', ');
+    $('.locations h4').text(names);
+  });
+
 
 });
 
@@ -87,6 +131,12 @@ $('.filters button').click( function() {
   // Only the key is added if objAmen is not empty
   if (!(jQuery.isEmptyObject(objAmen))) {
     objFilters['amenities'] = Object.keys(objAmen);
+  }
+  if (!(jQuery.isEmptyObject(objState))) {
+    objFilters['states'] = Object.keys(objState);
+  }
+  if (!(jQuery.isEmptyObject(objCity))) {
+    objFilters['cities'] = Object.keys(objCity);
   }
   search_places(objFilters);
 });
